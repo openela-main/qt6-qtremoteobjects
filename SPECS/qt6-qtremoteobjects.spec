@@ -6,14 +6,13 @@
 %global prerelease rc2
 %endif
 
-%global examples 1
-# FIXME: needs bootstrap
 %global build_tests 1
+%global examples 1
 
 Summary: Qt6 - Qt Remote Objects
 Name:    qt6-%{qt_module}
-Version: 6.9.1
-Release: 3%{?dist}
+Version: 6.10.1
+Release: 1%{?dist}
 
 License: LGPL-3.0-only OR GPL-3.0-only WITH Qt-GPL-exception-1.0
 Url:     http://www.qt.io
@@ -32,7 +31,7 @@ BuildRequires: ninja-build
 BuildRequires: qt6-rpm-macros
 BuildRequires: qt6-qtbase-devel >= %{version}
 BuildRequires: qt6-qtbase-private-devel
-#libQt6Core.so.6(Qt_5_PRIVATE_API)(64bit)
+#libQt6Core.so.6(Qt_6_PRIVATE_API)(64bit)
 %{?_qt6:Requires: %{_qt6}%{?_isa} = %{_qt6_version}}
 BuildRequires: qt6-qtdeclarative-devel
 BuildRequires: pkgconfig(xkbcommon) >= 0.5.0
@@ -51,7 +50,6 @@ Requires: qt6-qtbase-devel%{?_isa}
 %package examples
 Summary: Programming examples for %{name}
 Requires: %{name}%{?_isa} = %{version}-%{release}
-# BuildRequires: qt6-qtremoteobjects-devel >= %{version}
 %description examples
 %{summary}.
 %endif
@@ -61,7 +59,6 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 Summary: Unit tests for %{name}
 BuildRequires: qt6-qtconnectivity-devel >= %{version}
 BuildRequires: qt6-qtdeclarative-static >= %{version}
-BuildRequires: qt6-qtremoteobjects-devel >= %{version}
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description tests
 %{summary}.
@@ -115,7 +112,6 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 %dir %{_qt6_libdir}/cmake/Qt6RemoteObjectsQmlPrivate/
 %dir %{_qt6_libdir}/cmake/Qt6RemoteObjectsTools
 %dir %{_qt6_libdir}/cmake/Qt6RepParser
-%dir %{_qt6_libdir}/cmake/Qt6RepParserPrivate/
 %{_qt6_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtRemoteObjectsTestsConfig.cmake
 %{_qt6_libdir}/cmake/Qt6Qml/QmlPlugins/*.cmake
 %{_qt6_libdir}/cmake/Qt6RemoteObjects/*.cmake
@@ -124,7 +120,6 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 %{_qt6_libdir}/cmake/Qt6RemoteObjectsQmlPrivate/*.cmake
 %{_qt6_libdir}/cmake/Qt6RemoteObjectsTools/*.cmake
 %{_qt6_libdir}/cmake/Qt6RepParser/*.cmake
-%{_qt6_libdir}/cmake/Qt6RepParserPrivate/*.cmake
 %{_qt6_archdatadir}/mkspecs/features/*
 %{_qt6_archdatadir}/mkspecs/modules/*
 %{_qt6_libdir}/qt6/metatypes/qt6*_metatypes.json
@@ -142,6 +137,10 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 %endif
 
 %changelog
+* Mon Nov 24 2025 Jan Grulich <jgrulich@redhat.com> - 6.10.1-1
+- 6.10.1
+  Resolves: RHEL-109197
+
 * Mon Jun 09 2025 Jan Grulich <jgrulich@redhat.com> - 6.9.1-3
 - Re-enable tests
   Resolves: RHEL-78545
